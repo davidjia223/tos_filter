@@ -1,0 +1,14 @@
+{
+  "name": "tos_extract",
+  "version": "1.0.0",
+  "description": "",
+  "main": "tos_extract.js",
+  "scripts": {
+    "start": "node tos_filter.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "compromise": "^14.9.0"
+  }
+}
