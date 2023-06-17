@@ -9,6 +9,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "compromise": "^14.9.0"
+    "compromise": "^14.9.0",
+    "compromise-sentences": "^0.3.0",
+    "node-fetch": "^3.3.1"
   }
 }
