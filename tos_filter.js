@@ -13,7 +13,7 @@ function extractSections(text, keywords) {
 }
 
 const tosText = `
-This is your temrs of service text. Should include information such as "data use", "privacy", "disputes", or "cancellations".
+This is your terms of service text. It should include information such as "data use", "privacy", "disputes", or "cancellations".
 `; // Replace with your actual Terms of Service text.
 
 const keywords = ['data use', 'privacy', 'disputes', 'cancellations'];
