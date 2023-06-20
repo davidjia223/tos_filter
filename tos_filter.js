@@ -1,5 +1,14 @@
+const natural = require('natural');
 const nlp = require('compromise');
 nlp.extend(require('compromise-sentences'));
+
+const classifier = new natural.BayesClassifier();
+
+//Train the classifier; 'positive' means harmless, 'negative' means its suspicious
+classifier.addDocument('we use your data to improve our services', 'positive');
+classifier.addDocument('we share your data with third parties', 'negative');
+// ... add more examples
+classifier.train();
 
 function extractSections(text, keywords) {
   const doc = nlp(text);
