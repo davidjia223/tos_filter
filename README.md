@@ -1,4 +1,4 @@
 ﻿# tos_filter
 A subpart of the project is named OPENAI Terms of Service analyzer. 
 
--This project aims to make the terms of service more simplistic as it cuts out the unimportant words and details for analysis
+-word filter program that turns a terms of service and minimizes it. Removing all the "common" legal sentences and essentially giving us rest of the "suspicious" code to look at. 
