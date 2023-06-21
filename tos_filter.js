@@ -8,6 +8,7 @@ const classifier = new natural.BayesClassifier();
 // Train the classifier; 'positive' means harmless, 'negative' means its suspicious
 classifier.addDocument('we use your data to improve our services', 'positive');
 classifier.addDocument('we share your data with third parties', 'negative');
+
 // ... add more examples
 classifier.train();
 
@@ -28,7 +29,11 @@ function filterCommonLegalSentences(sentences, commonSentences, threshold = 0.9)
 
 function extractSections(text, keywords) {
   const doc = nlp(text);
-  let sentences = doc.sentences().out('array'); // Use 'let' instead of 'const'
+  let sentences = doc.sentences().out('array'); 
+
+  // Print each sentence before filtering
+  console.log('Before filtering:');
+  sentences.forEach(sentence => console.log(sentence));
 
   // Filter out common legal sentences
   sentences = filterCommonLegalSentences(sentences, commonLegalSentences);
@@ -41,6 +46,10 @@ function extractSections(text, keywords) {
     }
     // Classify the sentence
     const classification = classifier.classify(sentence);
+
+    // Print the classification result for each sentence
+    console.log(`\nClassification of "${sentence}": ${classification}`);
+
     // If the sentence includes a keyword and is classified as 'negative', then it's relevant
     return classification === 'negative';
   });
