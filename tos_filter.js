@@ -1,3 +1,4 @@
+const fs = require('fs');
 const natural = require('natural');
 const nlp = require('compromise');
 nlp.extend(require('compromise-sentences'));
@@ -13,12 +14,11 @@ classifier.train();
 // Define common legal sentences
 const commonLegalSentences = ['we use your data to improve our services', 'we respect your privacy'];
 
-
 // Define a function to filter out common legal sentences
 function filterCommonLegalSentences(sentences, commonSentences, threshold = 0.9) {
   return sentences.filter(sentence => {
     for (let i = 0; i < commonSentences.length; i++) {
-      if (JaroWinklerDistance(sentence, commonSentences[i]) > threshold) {
+      if (natural.JaroWinklerDistance(sentence.toLowerCase(), commonSentences[i].toLowerCase(), {ignoreCase: true}) > threshold) {
         return false;
       }
     }
@@ -28,13 +28,12 @@ function filterCommonLegalSentences(sentences, commonSentences, threshold = 0.9)
 
 function extractSections(text, keywords) {
   const doc = nlp(text);
-  const sentences = doc.sentences().out('array');
+  let sentences = doc.sentences().out('array'); // Use 'let' instead of 'const'
 
   // Filter out common legal sentences
-  sentences = filterCommonLegalSentences(sentences, commonLegalSentences)
+  sentences = filterCommonLegalSentences(sentences, commonLegalSentences);
 
   const relevantSentences = sentences.filter(sentence => {
-
     // Check if sentence includes one of the keywords
     const hasKeyword = keywords.some(keyword => sentence.toLowerCase().includes(keyword.toLowerCase()));
     if (!hasKeyword) {
@@ -49,9 +48,8 @@ function extractSections(text, keywords) {
   return relevantSentences.join(' ');
 }
 
-const tosText = `
-This is your terms of service text. It should include information such as "data use", "privacy", "disputes", or "cancellations".
-`; // Replace with your actual Terms of Service text.
+// Load Terms of Service text from a local file
+const tosText = fs.readFileSync('./tos.txt', 'utf8');
 
 const keywords = ['data use', 'privacy', 'disputes', 'cancellations'];
 
