@@ -2,15 +2,7 @@ const fs = require('fs');
 const natural = require('natural');
 const nlp = require('compromise');
 nlp.extend(require('compromise-sentences'));
-
-const classifier = new natural.BayesClassifier();
-
-// Train the classifier; 'positive' means harmless, 'negative' means its suspicious
-classifier.addDocument('we use your data to improve our services', 'positive');
-classifier.addDocument('we share your data with third parties', 'negative');
-
-// ... add more examples
-classifier.train();
+const classifier = require('./trainClassifier');
 
 // Define common legal sentences
 const commonLegalSentences = ['we use your data to improve our services', 'we respect your privacy'];
