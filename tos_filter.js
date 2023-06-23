@@ -3,9 +3,7 @@ const natural = require('natural');
 const nlp = require('compromise');
 nlp.extend(require('compromise-sentences'));
 const classifier = require('./trainClassifier');
-
-// Define common legal sentences
-const commonLegalSentences = ['we use your data to improve our services', 'we respect your privacy'];
+const commonLegalSentences = require('./commonLegalSentences');
 
 // Define a function to filter out common legal sentences
 function filterCommonLegalSentences(sentences, commonSentences, threshold = 0.9) {
