@@ -1,5 +1,4 @@
 //tos_filter.js
-
 const fs = require('fs');
 const natural = require('natural');
 const nlp = require('compromise');
@@ -35,23 +34,27 @@ function extractSections(text, keywords) {
   sentences = filterCommonLegalSentences(sentences, commonLegalSentences);
 
   const relevantSentences = sentences.filter(sentence => {
-    // Check if sentence includes one of the keywords
     const docSentence = nlp(sentence);
+    
+    // Check if sentence includes one of the keywords
     const hasKeyword = keywords.some(keyword => docSentence.has(keyword));
-    if (!hasKeyword) {
+
+    // Check if the sentence does not include limiting phrases
+    const isBroadStatement = !docSentence.has('only').out('boolean') && !docSentence.has('limited to').out('boolean');
+
+    // If the sentence does not include a keyword or is not a broad statement, skip it
+    if (!hasKeyword || !isBroadStatement) {
       return false;
     }
     
-    const isBroadStatement = !docSentence.has('only').out('boolean') && !docSentence.has('limited to').out('boolean');
-    if (isBroadStatement) {
-      console.log(`\nBroad statement detected: "${sentence}"`);
-    }
-
-    // Classify and Print the classification result for each sentence
+    // Classify and Print the classification result and broad statement detection for each sentence
     const classification = classifier.classify(sentence);
     console.log(`\nClassification of "${sentence}": ${classification}`);
+    if (isBroadStatement) {
+      console.log(`Broad statement detected: "${sentence}"`);
+    }
 
-    // If the sentence includes a keyword and is classified as 'negative', then it's relevant
+    // If the sentence includes a keyword, is a broad statement, and is classified as 'negative', then it's relevant
     return classification === 'negative';
   });
 
