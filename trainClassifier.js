@@ -7,6 +7,11 @@ const classifier = new natural.BayesClassifier();
 classifier.addDocument('Your data will only be used to improve your experience.', 'positive');
 classifier.addDocument('We respect your privacy and will not share your data with third parties without your consent.', 'positive');
 classifier.addDocument('In the event of a dispute, we aim to resolve it amicably with your best interests at heart.', 'positive');
+classifier.addDocument('You have the right to delete your data at any time.', 'positive');
+classifier.addDocument('We protect your data using state-of-the-art encryption technologies.', 'positive');
+classifier.addDocument('We will notify you immediately in case of a data breach.', 'positive');
+classifier.addDocument('Your consent will be requested before we share any of your personal data.', 'positive');
+classifier.addDocument('We comply with all data protection laws and regulations.', 'positive');
 
 // "negative" sentences: these involve data sharing, potential privacy issues, or other matters of concern
 classifier.addDocument('Reserves the right, at its sole discretion, to change, modify, add or remove portions of these Terms of Use, at any time.', 'negative');
