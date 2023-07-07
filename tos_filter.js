@@ -40,7 +40,7 @@ function extractSections(text, keywords) {
     const hasKeyword = keywords.some(keyword => docSentence.has(keyword));
 
     // Check if the sentence does not include limiting phrases
-    const isBroadStatement = docSentence.has('only').list.length === 0 && docSentence.has('limited to').list.length === 0;
+    const isBroadStatement = !docSentence.match('only').found && !docSentence.match('limited to').found;
 
     // If the sentence does not include a keyword or is not a broad statement, skip it
     if (!hasKeyword || !isBroadStatement) {
