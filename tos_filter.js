@@ -13,7 +13,7 @@ function filterCommonLegalSentences(sentences, commonSentences, threshold = 0.9)
     for (let i = 0; i < commonSentences.length; i++) {
       let commonClauses = nlp(commonSentences[i]).clauses().out('array');
       for (let j = 0; j < sentenceClauses.length; j++) {
-        if (natural.JaroWinklerDistance(sentenceClauses[j].toLowerCase(), commonClauses[j].toLowerCase(), {ignoreCase: true}) > threshold) {
+        if (commonClauses[j] && natural.JaroWinklerDistance(sentenceClauses[j].toLowerCase(), commonClauses[j].toLowerCase(), {ignoreCase: true}) > threshold) {
           return false;
         }
       }
@@ -40,7 +40,7 @@ function extractSections(text, keywords) {
     const hasKeyword = keywords.some(keyword => docSentence.has(keyword));
 
     // Check if the sentence does not include limiting phrases
-    const isBroadStatement = !docSentence.has('only').out('boolean') && !docSentence.has('limited to').out('boolean');
+    const isBroadStatement = docSentence.has('only').list.length === 0 && docSentence.has('limited to').list.length === 0;
 
     // If the sentence does not include a keyword or is not a broad statement, skip it
     if (!hasKeyword || !isBroadStatement) {

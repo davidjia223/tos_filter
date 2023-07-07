@@ -27,6 +27,12 @@ classifier.addDocument('Your data will be stored for an indefinite period even a
 classifier.addDocument('Your non-personally identifiable information may be provided to other parties for marketing, advertising, or other uses.', 'negative');
 classifier.addDocument('disputes will be resolved in our sole discretion', 'negative');
 classifier.addDocument('we may disclose your information to our business partners', 'negative');
+classifier.addDocument('We may sell your personal information to third parties for marketing purposes.', 'negative');
+classifier.addDocument('We may change our Terms of Service without giving any notice.', 'negative');
+classifier.addDocument('We hold no responsibility for any data loss or security breaches.', 'negative');
+classifier.addDocument('Your data may be processed in countries with lower data protection standards.', 'negative');
+classifier.addDocument('By using our service, you give up your right to take any disputes to court.', 'negative');
+classifier.addDocument('We have the right to suspend or terminate your account without prior notice or reason.', 'negative');
 
 // ... add more examples
 classifier.train();
