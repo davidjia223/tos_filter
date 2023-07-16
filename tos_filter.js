@@ -42,8 +42,11 @@ function extractSections(text, keywords) {
     // Check if the sentence does not include limiting phrases
     const isBroadStatement = !docSentence.match('only').found && !docSentence.match('limited to').found;
 
+    // Check if the sentence includes changes without notice
+    const changesWithoutNotice = checkForChangesWithoutNotice(sentence);
+
     // If the sentence does not include a keyword or is not a broad statement, skip it
-    if (!hasKeyword || !isBroadStatement) {
+    if (!hasKeyword || (!isBroadStatement && !changesWithoutNotice)) {
       return false;
     }
     
@@ -61,10 +64,22 @@ function extractSections(text, keywords) {
   return relevantSentences.join(' ');
 }
 
+function checkForChangesWithoutNotice(sentence) {
+  const changeRegex = /change|modify|alter/i;
+  const noticeRegex = /notice|inform|notify/i;
+
+  if (changeRegex.test(sentence) && !noticeRegex.test(sentence)) {
+    console.log(`Changes without notice detected: "${sentence}"`);
+    return true;
+  }
+
+  return false;
+}
+
 // Load Terms of Service text from a local file
 const tosText = fs.readFileSync('./tos.txt', 'utf8');
 
-const keywords = ['data use', 'privacy', 'disputes', 'cancellations'];
+const keywords = ['data use', 'privacy', 'disputes', 'cancellations', 'terms of service changes', 'data portability', 'data rectification', 'right to be forgotten'];
 
 const extractedText = extractSections(tosText, keywords);
 

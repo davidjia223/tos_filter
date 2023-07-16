@@ -33,6 +33,11 @@ classifier.addDocument('We hold no responsibility for any data loss or security 
 classifier.addDocument('Your data may be processed in countries with lower data protection standards.', 'negative');
 classifier.addDocument('By using our service, you give up your right to take any disputes to court.', 'negative');
 classifier.addDocument('We have the right to suspend or terminate your account without prior notice or reason.', 'negative');
+classifier.addDocument('You must be at least 18 years old to use our service.', 'negative');
+classifier.addDocument('We may retain your data indefinitely.', 'negative');
+classifier.addDocument('We allow third-party companies to serve ads and/or collect certain anonymous information.', 'negative');
+classifier.addDocument('These terms shall be governed by the laws of the state of California.', 'negative');
+classifier.addDocument('We may terminate your account at any time for any reason.', 'negative');
 
 // ... add more examples
 classifier.train();
