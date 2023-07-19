@@ -33,6 +33,7 @@ function extractSections(text, keywords) {
   // Filter out common legal sentences
   sentences = filterCommonLegalSentences(sentences, commonLegalSentences);
 
+  let negativeSentences = [];
   const relevantSentences = sentences.filter(sentence => {
     const docSentence = nlp(sentence);
     
@@ -45,11 +46,6 @@ function extractSections(text, keywords) {
     // Check if the sentence includes changes without notice
     const changesWithoutNotice = checkForChangesWithoutNotice(sentence);
 
-    // If the sentence does not include a keyword or is not a broad statement, skip it
-    if (!hasKeyword || (!isBroadStatement && !changesWithoutNotice)) {
-      return false;
-    }
-    
     // Classify and Print the classification result and broad statement detection for each sentence
     const classification = classifier.classify(sentence);
     console.log(`\nClassification of "${sentence}": ${classification}`);
@@ -57,11 +53,21 @@ function extractSections(text, keywords) {
       console.log(`Broad statement detected: "${sentence}"`);
     }
 
-    // If the sentence includes a keyword, is a broad statement, and is classified as 'negative', then it's relevant
-    return classification === 'negative';
+    // If the sentence is classified as 'negative', then it's added to the negativeSentences array
+    if (classification === 'negative') {
+      negativeSentences.push(sentence);
+    }
+
+    // If the sentence does not include a keyword or is not a broad statement, skip it
+    if (!hasKeyword || (!isBroadStatement && !changesWithoutNotice)) {
+      return false;
+    }
+    
+    return true;
   });
 
-  return relevantSentences.join(' ');
+  // Add negative sentences to the relevant sentences
+  return (relevantSentences.concat(negativeSentences)).join(' ');
 }
 
 function checkForChangesWithoutNotice(sentence) {
