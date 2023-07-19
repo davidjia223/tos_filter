@@ -13,4 +13,5 @@ A subpart of the project is named OPENAI Terms of Service analyzer.
 Technologies.
 Using machine learning model
 Training the model
+Usage of stopwords : Keeping content and structure of the text remain largely the same (for ai processing) 
 Using natural processing language : "Naive Bayes classifier" 
