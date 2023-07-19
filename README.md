@@ -8,3 +8,7 @@ A subpart of the project is named OPENAI Terms of Service analyzer.
 
 -Things this will look at are Data collection, third-party sharing, waiver of class action rights, liability, forced account deletion and more. 
 
+-Note to self: Improve the extracting service for better tos.txt
+
+Technologies.
+-NLP the "Naive Bayes classifier" 
