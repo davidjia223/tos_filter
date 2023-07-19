@@ -3,6 +3,19 @@
 const natural = require('natural');
 const classifier = new natural.BayesClassifier();
 
+const stemmer = natural.PorterStemmer;
+const stopwords = natural.stopwords;
+
+// add stopwords filtering and stemming when processing sentences
+const processSentence = (sentence) => {
+  const tokenized = natural.WordTokenizer().tokenize(sentence);
+  const filtered = tokenized.filter(word => !stopwords.includes(word));
+  return filtered.map(word => stemmer.stem(word)).join(' ');
+}
+
+// when adding documents, process sentences first
+classifier.addDocument(processSentence('Your data will only be used to improve your experience.'), 'positive');
+
 // "positive" sentences: these don't seem to involve anything harmful or suspicious
 classifier.addDocument('Your data will only be used to improve your experience.', 'positive');
 classifier.addDocument('We respect your privacy and will not share your data with third parties without your consent.', 'positive');

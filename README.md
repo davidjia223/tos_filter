@@ -11,4 +11,6 @@ A subpart of the project is named OPENAI Terms of Service analyzer.
 -Note to self: Improve the extracting service for better tos.txt
 
 Technologies.
--NLP the "Naive Bayes classifier" 
+Using machine learning model
+Training the model
+Using natural processing language : "Naive Bayes classifier" 
