@@ -8,9 +8,10 @@ const stopwords = natural.stopwords;
 
 // add stopwords filtering and stemming when processing sentences
 const processSentence = (sentence) => {
-  const tokenized = natural.WordTokenizer().tokenize(sentence);
-  const filtered = tokenized.filter(word => !stopwords.includes(word));
-  return filtered.map(word => stemmer.stem(word)).join(' ');
+    const tokenizer = new natural.WordTokenizer();
+    const tokenized = tokenizer.tokenize(sentence);
+    const filtered = tokenized.filter(word => !stopwords.includes(word));
+    return filtered.map(word => stemmer.stem(word)).join(' ');
 }
 
 // when adding documents, process sentences first
@@ -91,5 +92,4 @@ classifier.addDocument('We can discontinue the service without notifying you.', 
 classifier.addDocument('We have the right to use your data for decision-making and profiling.', 'negative');
 // ... add more examples
 classifier.train();
-
 module.exports = classifier;
