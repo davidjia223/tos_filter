@@ -6,6 +6,17 @@ nlp.extend(require('compromise-sentences'));
 const classifier = require('./trainClassifier');
 const commonLegalSentences = require('./commonLegalSentences');
 
+// Define your custom stopwords here
+const customStopwords = ['the', 'a', 'an', 'and', 'but', 'if', 'or', 'because', 'as', 'what', 'which', 'this', 'that', 'these', 'those', 'then',
+'so', 'than', 'such', 'both', 'through', 'about', 'for', 'is', 'of', 'while', 'during', 'to', 'What', 'Which', 'Is', 'If', 'While', 'This', 'It', 'Not'];
+
+// Function to process sentence by removing stopwords
+function processSentence(sentence) {
+  let words = sentence.split(' ');
+  words = words.filter(word => !customStopwords.includes(word));
+  return words.join(' ');
+}
+
 // Define a function to filter out common legal sentences
 function filterCommonLegalSentences(sentences, commonSentences, threshold = 0.9) {
   return sentences.filter(sentence => {
@@ -67,9 +78,13 @@ function extractSections(text, keywords) {
   });
 
   // Add negative sentences to the relevant sentences
-  return (relevantSentences.concat(negativeSentences)).join(' ');
-}
+  let finalText = (relevantSentences.concat(negativeSentences)).join(' ');
 
+  // Process the final text to remove stopwords
+  finalText = processSentence(finalText);
+
+  return finalText;
+}
 function checkForChangesWithoutNotice(sentence) {
   const changeRegex = /change|modify|alter/i;
   const noticeRegex = /notice|inform|notify/i;

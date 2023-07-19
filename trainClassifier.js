@@ -5,9 +5,9 @@ const classifier = new natural.BayesClassifier();
 
 const stemmer = natural.PorterStemmer;
 const stopwords = natural.stopwords;
-const customStopwords = [
-    'a', 'an', 'am', 'are', 'as', 'at', 
-];
+const customStopwords = ['the', 'a', 'an', 'and', 'but', 'if', 'or', 'because', 'as', 'what', 'which', 'this', 'that', 'these', 'those', 'then',
+'so', 'than', 'such', 'both', 'through', 'about', 'for', 'is', 'of', 'while', 'during', 'to', 'What', 'Which', 'Is', 'If', 'While', 'This', 'It', 'Not'];
+
 
 // add stopwords filtering and stemming when processing sentences
 const processSentence = (sentence) => {
