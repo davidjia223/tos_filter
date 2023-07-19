@@ -11,7 +11,11 @@ A subpart of the project is named OPENAI Terms of Service analyzer.
 -Note to self: Improve the extracting service for better tos.txt
 
 Technologies.
-Using machine learning model
+Machine learning model
 Training the model
-Usage of stopwords : Keeping content and structure of the text remain largely the same (for ai processing) 
-Using natural processing language : "Naive Bayes classifier" 
+Stopwords : Keeping content and structure of the text remain largely the same (for ai processing) 
+Natural Processing Language ; "Naive Bayes classifier" 
+Node.js ; fs, server-side execution
+Natural Node Mode ; Natural
+Text Classification : 
+Regular Expression ; Regex
