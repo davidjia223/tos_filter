@@ -12,6 +12,11 @@ classifier.addDocument('We protect your data using state-of-the-art encryption t
 classifier.addDocument('We will notify you immediately in case of a data breach.', 'positive');
 classifier.addDocument('Your consent will be requested before we share any of your personal data.', 'positive');
 classifier.addDocument('We comply with all data protection laws and regulations.', 'positive');
+classifier.addDocument('We reserve the right to use any user-generated content.', 'negative');
+classifier.addDocument('We disclaim all warranties, express or implied.', 'negative');
+classifier.addDocument('You agree to indemnify us against any claims or legal proceedings.', 'negative');
+classifier.addDocument('We may change or discontinue the service at any time without notice.', 'negative');
+classifier.addDocument('We may use your data for automated decision-making, including profiling.', 'negative');
 
 // "negative" sentences: these involve data sharing, potential privacy issues, or other matters of concern
 classifier.addDocument('Reserves the right, at its sole discretion, to change, modify, add or remove portions of these Terms of Use, at any time.', 'negative');
