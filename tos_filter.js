@@ -11,11 +11,11 @@ const customStopwords = ['the', 'a', 'an', 'and', 'but', 'if', 'or', 'because', 
 'so', 'than', 'such', 'both', 'through', 'about', 'for', 'is', 'of', 'while', 'during', 'to', 'What', 'Which', 'Is', 'If', 'While', 'This', 'It', 'Not'];
 
 // Function to process sentence by removing stopwords
-function processSentence(sentence) {
-  let words = sentence.split(' ');
-  words = words.filter(word => !customStopwords.includes(word));
-  return words.join(' ');
+function processSentence(sentence, stopwords) {
+  const regex = new RegExp(`\\b(${stopwords.join('|')})\\b`, 'gi');
+  return sentence.replace(regex, '').replace(/\s{2,}/g, ' ').trim();
 }
+
 
 // Define a function to filter out common legal sentences
 function filterCommonLegalSentences(sentences, commonSentences, threshold = 0.9) {
